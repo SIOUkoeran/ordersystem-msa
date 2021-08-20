@@ -1,5 +1,5 @@
-# msa-webflux-demo
+# msa-webflux-demo (study)
 
-## 웹플럭스를 기반으로 간단한 msa 프로젝트 
+## 웹플럭스를 기반으로 한 msa 
 
 
