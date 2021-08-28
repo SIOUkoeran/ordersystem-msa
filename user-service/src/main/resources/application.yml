@@ -5,11 +5,28 @@ spring:
   application:
     name: user-service
 
+
+springbootwebfluxjjwt:
+  jjwt:
+    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+    expiration: 28800
+  password:
+    encoder:
+      secret: mysecret
+      iteration: 33
+      keylength: 256
+
+
+
+
 eureka:
   instance:
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
-    fetch-registry: true
     register-with-eureka: true
+    fetch-registry: true
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
+      defaulZone: http://127.0.0.1:8761/eureka
+
+greeting:
+  message: Welcome
