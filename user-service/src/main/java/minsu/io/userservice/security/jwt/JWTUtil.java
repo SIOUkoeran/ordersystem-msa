@@ -4,6 +4,7 @@ package minsu.io.userservice.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import minsu.io.userservice.domain.User;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,7 +66,7 @@ public class JWTUtil {
                 .setSubject(userId)
                 .setIssuedAt(createDate)
                 .setExpiration(expirationDate)
-                .signWith(key)
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 
