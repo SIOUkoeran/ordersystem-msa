@@ -1,5 +1,11 @@
 # msa-webflux-demo (study)
 
-## 웹플럭스를 기반으로 한 msa 
+## based on webflux 
 
+---
 
+3 MicroServcies + (...)
+
+reactiveMongoDB + Spring Cloud + Eureka + Spring Security 
+
+(resillience4j, kafak, docker)
