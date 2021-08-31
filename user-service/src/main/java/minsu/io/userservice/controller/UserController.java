@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext;
 
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,19 +30,16 @@ public class UserController {
 
     private UserService userService;
     private ReactiveWebServerApplicationContext context;
+    private Environment env;
 
 
 
     @Autowired
-    public UserController( UserService userService, ReactiveWebServerApplicationContext context) {
-
+    public UserController(UserService userService, ReactiveWebServerApplicationContext context, Environment env) {
         this.userService = userService;
-        this.context=context;
-
+        this.context = context;
+        this.env = env;
     }
-
-
-
 
     @GetMapping("/welcome")
     public Flux<String> welcome(){
@@ -51,10 +49,14 @@ public class UserController {
     }
 
     @GetMapping("/health-check")
-    public Mono<String> status(){
+    public Flux<String> status(){
 
 
-        return Mono.just("It's working");
+        return Flux.just("It's working" +
+                ", port(local.server.port) = " + env.getProperty("local.server.port") +
+                ", port(server.port) = " + env.getProperty("server.port") +
+                ", with token secret = " + env.getProperty("springbootwebfluxjjwt.jjwt.secret") +
+                ", with token time = " + env.getProperty("springbootwebfluxjjwt.jjwt.expiration"));
     }
 
 
@@ -97,13 +99,6 @@ public class UserController {
 
 
     }
-////    @GetMapping(value = "/users")
-////    public Flux<User> UserList(){
-////
-////
-////        log.info("user{}", repository.findAll());
-////        return this.userService.getUsers();
-////    }
 
 
 }
