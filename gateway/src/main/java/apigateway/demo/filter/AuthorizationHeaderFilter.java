@@ -3,13 +3,14 @@ package apigateway.demo.filter;
 
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.PostConstruct;
+
 
 @Component
 @Slf4j
@@ -29,7 +30,6 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
 
     Environment env;
-
     @Autowired
     public AuthorizationHeaderFilter(Environment env) {
         super(Config.class);
@@ -39,8 +39,8 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     public static class Config{
 
     }
-
-
+    @Value("${springbootwebfluxjjwt.jjwt.secret}")
+    private String ss;
 
     @Override
     public GatewayFilter apply(Config config) {
@@ -51,7 +51,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                 return onError(exchange, "No authorization header", HttpStatus.UNAUTHORIZED);
             }
             String jwt = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
-            jwt = "Bearer " +jwt;
+            jwt = jwt.replace("Bearer ", "");
             if (!isJwtValid(jwt)){
                 return onError(exchange, "JWT token is Not Valid", HttpStatus.UNAUTHORIZED);
 
@@ -67,8 +67,6 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
 
     private boolean isJwtValid(String jwt) {
-
-
 
         boolean returnValue = true;
         String subject = null;
@@ -87,22 +85,6 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         }
         return returnValue;
 
-//        return Mono.just(Jwts.parserBuilder()
-//                .setSigningKey(env.getProperty("springbootwebfluxjjwt.jjwt.secret"))
-//                .build()
-//                .parseClaimsJwt(jwt)
-//                .getBody().getSubject())
-//                .map(s -> {
-//                    if (s == null | s.isEmpty()) {
-//
-//                        return false;
-//                    }
-//                    return true;
-//                })
-//                .onErrorReturn(false);
-
-//        return returnValue;
-//
     }
 
     private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus ) {
