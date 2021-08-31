@@ -8,4 +8,4 @@
 
 reactiveMongoDB + Spring Cloud + Eureka + Spring Security 
 
-(resillience4j, kafak, docker)
+(resilience4j, kafka, docker)
