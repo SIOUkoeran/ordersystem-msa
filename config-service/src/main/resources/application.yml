@@ -10,3 +10,23 @@ spring:
           uri: https://github.com/SIOUkoeran/max-webflux-demo-config.git
           #username:
           #password:
+
+
+#        native:
+#          search-locations: file:C:/Users/alstn/Desktop/springStudy/git-local-repo
+
+
+
+
+
+  rabbitmq:
+    host: 127.0.0.1
+    username: guest
+    password: guest
+  profiles:
+    active: native
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, bursefresh
