@@ -4,30 +4,6 @@ server:
 spring:
   application:
     name: user-service
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: guest
-    password: guest
-
-
-#springbootwebfluxjjwt:
-##  jjwt:
-##    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
-##    expiration: 28800
-#  password:
-#    encoder:
-#      secret: mysecret
-#      iteration: 33
-#      keylength: 256
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh, health, beans, busrefresh
-
-
 
 eureka:
   instance:

@@ -1,2 +1,16 @@
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/SIOUkoeran/max-webflux-demo-config.git
+
+
 encrypt:
-  key: abcdefghijklmnopqrstuvwxyz0123456789
+  key-store:
+    location: file:///${user.home}/Desktop/springStudy/git-local-repo/keystore/apiEncryptionKey.jks
+    password: guest1234
+    alias: apiEncryptionKey
+
