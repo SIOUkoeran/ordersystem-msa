@@ -5,6 +5,7 @@ server:
 spring:
   application:
     name: apigateway-service
+
   cloud:
     gateway:
       routes:
@@ -74,5 +75,5 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, httptrace
+        include: refresh, health, beans, httptrace, busrefresh
 

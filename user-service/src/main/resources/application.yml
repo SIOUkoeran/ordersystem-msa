@@ -5,25 +5,6 @@ spring:
   application:
     name: user-service
 
-
-#springbootwebfluxjjwt:
-##  jjwt:
-##    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
-##    expiration: 28800
-#  password:
-#    encoder:
-#      secret: mysecret
-#      iteration: 33
-#      keylength: 256
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh, health, beans
-
-
-
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
