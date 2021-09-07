@@ -39,7 +39,7 @@ public class OrderController {
 
 
 
-    @PostMapping(value = "/{userId}/order")
+    @PostMapping(value = "/{userId}/orders")
     public Mono<ResponseEntity<ResponseOrder>> createOrder(
             @PathVariable("userId") String userId, @RequestBody Mono<RequestOrder> requestOrder) {
         Mono<OrderDto> orderDto = requestOrder.map(r-> OrderDto.builder()
@@ -60,7 +60,7 @@ public class OrderController {
         return Mono.just("It's working in OrderService on Port" + context.getWebServer().getPort());
     }
 
-    @GetMapping(value = "/{userId}/order")
+    @GetMapping(value = "/{userId}/orders")
     public ResponseEntity<Flux<ResponseOrder>> getOrders(@PathVariable("userId") String id){
 
         Flux<ResponseOrder> orders = this.orderService.getOrdersByUserId(id)

@@ -78,12 +78,13 @@ public class UserController {
 
 
     }
+
     @GetMapping(value="/users/{userId}")
     public Mono<ResponseEntity<ResponseUser>> findUser(@PathVariable("userId") String userId){
 
 
         return this.userService.getUserByUserId(userId)
-                                    .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Users not Found")))
+
                                     .map(userDto -> ResponseUser.builder()
                                                     .name(userDto.getName())
                                                     .email(userDto.getEmail())

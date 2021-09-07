@@ -5,8 +5,8 @@ import minsu.io.userservice.domain.User;
 import minsu.io.userservice.dto.UserDto;
 
 
+import minsu.io.userservice.vo.ResponseOrder;
 import minsu.io.userservice.vo.ResponseUser;
-import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -17,7 +17,7 @@ public interface UserService{
 
     Mono<UserDto> getUserByUserId(String userId);
 
-
+    Flux<ResponseOrder> getOrders(String orderUrl);
     Mono<User> findByUserEmail(String email);
 
 
