@@ -4,6 +4,7 @@ package minsu.io.orderservice.service;
 import lombok.extern.slf4j.Slf4j;
 import minsu.io.orderservice.domain.Order;
 import minsu.io.orderservice.dto.OrderDto;
+import minsu.io.orderservice.kafka.KafkaProducer;
 import minsu.io.orderservice.repository.OrderRepository;
 import minsu.io.orderservice.vo.ResponseOrder;
 import org.joda.time.DateTime;
@@ -18,16 +19,17 @@ public class OrderServiceImpl implements OrderService{
 
 
     private final OrderRepository repository;
-
+    private final KafkaProducer kafkaProducer;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository repository) {
+    public OrderServiceImpl(OrderRepository repository, KafkaProducer kafkaProducer) {
         this.repository = repository;
+        this.kafkaProducer  = kafkaProducer;
     }
 
     public Mono<ResponseOrder> createOrder(Mono<OrderDto> orderDto) {
 
-
+        kafkaProducer.send("example-order-topic", orderDto);
 
         return orderDto.map(o-> Order.builder().productId(o.getProductId())
                                                         .qty(o.getQty())

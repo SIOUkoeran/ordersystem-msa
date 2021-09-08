@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import minsu.io.orderservice.dto.OrderDto;
 
+import minsu.io.orderservice.kafka.KafkaProducer;
 import minsu.io.orderservice.vo.RequestOrder;
 import minsu.io.orderservice.vo.ResponseOrder;
 import minsu.io.orderservice.service.OrderService;
@@ -15,6 +16,7 @@ import org.springframework.boot.web.reactive.context.ReactiveWebServerApplicatio
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -29,12 +31,15 @@ public class OrderController {
 
     private final OrderService orderService;
     private final ReactiveWebServerApplicationContext context;
-
+    private final KafkaProducer kafkaProducer;
 
     @Autowired
-    public OrderController(OrderService orderService, ReactiveWebServerApplicationContext context) {
+    public OrderController(OrderService orderService, ReactiveWebServerApplicationContext context,
+                           KafkaProducer kafkaProducer
+    ) {
         this.orderService = orderService;
         this.context = context;
+        this.kafkaProducer = kafkaProducer;
     }
 
 
@@ -62,6 +67,7 @@ public class OrderController {
 
     @GetMapping(value = "/{userId}/orders")
     public ResponseEntity<Flux<ResponseOrder>> getOrders(@PathVariable("userId") String id){
+
 
         Flux<ResponseOrder> orders = this.orderService.getOrdersByUserId(id)
                                                             .map(order->ResponseOrder.builder()

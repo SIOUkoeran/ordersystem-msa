@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @RequiredArgsConstructor
-@Document(value = "Order")
+@Document(collection = "Order")
 public class Order {
 
     private @Id String orderId;
