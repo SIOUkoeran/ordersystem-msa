@@ -4,6 +4,6 @@
 ---
 3 MicroServcies + (...)
 
-reactiveMongoDB + Spring Cloud + Eureka + Spring Security +rabbitmq
+reactiveMongoDB + Spring Cloud + Eureka + Spring Security +rabbitmq + kafka
 
-(resilience4j, kafka, docker)
+(resilience4j, docker)
