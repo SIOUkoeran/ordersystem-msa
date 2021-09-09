@@ -5,9 +5,12 @@ package minsu.io.orderservice.kafka;
 import lombok.extern.slf4j.Slf4j;
 
 import minsu.io.orderservice.dto.OrderDto;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
@@ -21,6 +24,10 @@ public class KafkaProducer {
     public KafkaProducer(ReactiveKafkaProducerTemplate<String, Object> reactiveKafkaProducerTemplate) {
         this.reactiveKafkaProducerTemplate = reactiveKafkaProducerTemplate;
     }
+
+
+
+
 
     public Mono<Boolean> send(String topic, Mono<OrderDto> orderDto){
         log.info("message =====> {}", topic);

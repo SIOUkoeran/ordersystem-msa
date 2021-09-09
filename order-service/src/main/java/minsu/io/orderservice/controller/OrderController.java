@@ -55,7 +55,7 @@ public class OrderController {
                                                                     .totalPrice(r.getUnitPrice() * r.getQty())
                                                                     .build());
 
-
+        kafkaProducer.send("example-order-service", orderDto);
         return this.orderService.createOrder(orderDto)
                 .map(responseOrder -> ResponseEntity.status(HttpStatus.CREATED).body(responseOrder));
 
@@ -70,6 +70,7 @@ public class OrderController {
 
 
         Flux<ResponseOrder> orders = this.orderService.getOrdersByUserId(id)
+
                                                             .map(order->ResponseOrder.builder()
                                                                     .orderId(order.getOrderId())
                                                                     .productId(order.getProductId())
@@ -78,6 +79,7 @@ public class OrderController {
                                                                     .createdAt(order.getCreatedAt())
                                                                     .qty(order.getQty())
                                                                     .build());
+
         return ResponseEntity.status(HttpStatus.OK).body(orders);
 
     }
