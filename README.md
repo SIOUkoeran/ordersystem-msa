@@ -11,9 +11,9 @@ reactiveMongoDB + Spring Cloud + Eureka + Spring Security +rabbitmq + kafka
 ---
 shopping mall 
 
-          -> config service ----spring Cloud-----------> rabbitMQ 
-discovery -> gateway( loadbalancer + auth filter + ) -->  catalog -service : catalog server(webflux)   ---> kafka (reactive) ----> mongo DB (reactive)
-             
-                                                     -->  order -service : order server(webflux)     
-
-                                                     -->  user -service : user server(webflux)   
+           
+discovery -> gateway( loadbalancer + auth filter + ) --->  catalog -service : catalog server(webflux)   ---> kafka (reactive) ----> mongo DB (reactive)
+          -> config service -------- rabbitMQ ---------->  
+                                                     --->  order -service : order server(webflux)     
+          -> spring security---------------------------->         
+                                                     --->  user -service : user server(webflux)   
