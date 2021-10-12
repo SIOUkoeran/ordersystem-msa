@@ -14,6 +14,6 @@ shopping mall
            
 discovery -> gateway( loadbalancer + auth filter + ) --->  catalog -service : catalog server(webflux)   ---> kafka (reactive) ----> mongo DB (reactive)
           -> config service -------- rabbitMQ ---------->  
-                                                     --->  order -service : order server(webflux)     
+                                                                              --->  order -service : order server(webflux)     
           -> spring security---------------------------->         
-                                                     --->  user -service : user server(webflux)   
+                                                                              --->  user -service : user server(webflux)   
