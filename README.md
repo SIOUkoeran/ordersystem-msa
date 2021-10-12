@@ -11,4 +11,7 @@ reactiveMongoDB + Spring Cloud + Eureka + Spring Security +rabbitmq + kafka
 ---
 small 5 micro service 
 
-discovery -> config service ->spring security -> gateway(load balance + auth filter) -> order-service + catalog-service + order-service 
+Discovery-service -> Config service--> RabbitMQ -> Spring security -> Gateway(load balancer + auth filter) 
+
+
+-> Order-service + Catalog-service + Order-service (webFlux) -> Kafka -> MongoDB
