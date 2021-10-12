@@ -2,7 +2,7 @@
 
 ## based on webflux
 ---
-3 MicroServcies + (...)
+
 
 reactiveMongoDB + Spring Cloud + Eureka + Spring Security +rabbitmq + kafka
 
@@ -10,6 +10,8 @@ reactiveMongoDB + Spring Cloud + Eureka + Spring Security +rabbitmq + kafka
 
 ---
 small 5 micro service 
+
+flow
 
 Discovery-service -> Config service--> RabbitMQ -> Spring security -> Gateway(load balancer + auth filter) 
 
